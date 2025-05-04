@@ -1,46 +1,35 @@
 name: Build Android APK
 
-on
-If updating the version does not` file to use `actions/upload-artifact@v3`. Here's the resolve the issue, check the network connectivity of:
+on:
   push:
     branches:
-      - master        # Trigger saat your GitHub runner. Ensure it can access the GitHub corrected snippet:
-
-   ```yaml
-   - name: Upload APK Actions marketplace to fetch the required action.
-
- push ke branch master
+      - master        # Trigger saat push ke branch master
   pull_request:
     branches:
- as artifact
-     uses: actions/upload-artifact@#### Step 3: Retry the Workflow
-After making the changes      - master        # Trigger saat ada PR ke branch master, push the updated workflow file to trigger thev3
-     with:
-       name: android-apk
-       path: workflow again.
-
-### Why This Works
-- Updating to
+      - master        # Trigger saat ada PR ke branch master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
- a newer version ensures compatibility with the GitHub Actions runner and fixes any potential bugs in app/build/outputs/apk/release/app-release.apk
-   `` older versions.
-- Restarting the workflow    steps:
+    steps:
       - name: Checkout code
-        uses: after verifying network connectivity resolves transient issues`
-
-3. **Commit and Push the Changes**:
-   Save the changes. 
-
-Let me know if you encounter further errors after updating! and push them to your repository to trigger the actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Set up JDK 11
         uses: actions/setup-java@v3
- workflow again.
+        with:
+          java-version: '11'
+          distribution: 'adoptopenjdk'
 
-### Why this works
-The `actions/upload        with:
-         
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x ./gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-apk
+          path: app/build/outputs/apk/release/app-release.apk
