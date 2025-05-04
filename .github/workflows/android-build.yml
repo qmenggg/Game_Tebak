@@ -3,7 +3,7 @@ name: Build Android APK
 on:
   push:
     branches:
-      - main  # Ganti jika kamu pakai branch lain seperti 'master'
+      - master # Ganti jika kamu pakai branch lain seperti 'master'
 
 jobs:
   build:
